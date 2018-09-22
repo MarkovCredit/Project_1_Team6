@@ -1,0 +1,1196 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{T6\_P1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Team 6 Project 1 : Analysis of Regionwise Sales Data for Video
+Games}\label{team-6-project-1-analysis-of-regionwise-sales-data-for-video-games}
+
+Team: Mark Levine, Richa Singh, John Yun, Miguel Gomez
+
+Data source "Kaggle.com" https://www.kaggle.com/gregorut/videogamesales
+
+Notebook Contents 1. Data pull 2. Data Cleaning 3. Data Exploration
+/Initial Analysis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Import Dependencies}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{style}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Read CSV File }
+         \PY{c+c1}{\PYZsh{} Cite Data Source\PYZdq{}\PYZdq{}}
+         \PY{n}{file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/richasingh/Desktop/vgsales.csv}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}read the data frame}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    Rank                      Name Platform    Year         Genre Publisher  \textbackslash{}
+        0     1                Wii Sports      Wii  2006.0        Sports  Nintendo   
+        1     2         Super Mario Bros.      NES  1985.0      Platform  Nintendo   
+        2     3            Mario Kart Wii      Wii  2008.0        Racing  Nintendo   
+        3     4         Wii Sports Resort      Wii  2009.0        Sports  Nintendo   
+        4     5  Pokemon Red/Pokemon Blue       GB  1996.0  Role-Playing  Nintendo   
+        
+           NA\_Sales  EU\_Sales  JP\_Sales  Other\_Sales  Global\_Sales  
+        0     41.49     29.02      3.77         8.46         82.74  
+        1     29.08      3.58      6.81         0.77         40.24  
+        2     15.85     12.88      3.79         3.31         35.82  
+        3     15.75     11.01      3.28         2.96         33.00  
+        4     11.27      8.89     10.22         1.00         31.37  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Data Overview for any cleanup requirements}
+         \PY{n}{df}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} Rank            16598
+         Name            16598
+         Platform        16598
+         Year            16327
+         Genre           16598
+         Publisher       16540
+         NA\_Sales        16598
+         EU\_Sales        16598
+         JP\_Sales        16598
+         Other\_Sales     16598
+         Global\_Sales    16598
+         dtype: int64
+\end{Verbatim}
+            
+    \section{Data Cleaning Findings}\label{data-cleaning-findings}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The counts for Year and Publisher column does not match up. Need for
+  clean up.
+\item
+  Year column has 271 entries with N/A
+\item
+  Publisher column has 58 entries with N/A
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Cleaned data set by dropping N/A }
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} Rank            16291
+         Name            16291
+         Platform        16291
+         Year            16291
+         Genre           16291
+         Publisher       16291
+         NA\_Sales        16291
+         EU\_Sales        16291
+         JP\_Sales        16291
+         Other\_Sales     16291
+         Global\_Sales    16291
+         dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Data types }
+         \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Rank              int64
+         Name             object
+         Platform         object
+         Year            float64
+         Genre            object
+         Publisher        object
+         NA\_Sales        float64
+         EU\_Sales        float64
+         JP\_Sales        float64
+         Other\_Sales     float64
+         Global\_Sales    float64
+         dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} statistical overview}
+         \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}                Rank          Year      NA\_Sales      EU\_Sales      JP\_Sales  \textbackslash{}
+         count  16291.000000  16291.000000  16291.000000  16291.000000  16291.000000   
+         mean    8290.190228   2006.405561      0.265647      0.147731      0.078833   
+         std     4792.654450      5.832412      0.822432      0.509303      0.311879   
+         min        1.000000   1980.000000      0.000000      0.000000      0.000000   
+         25\%     4132.500000   2003.000000      0.000000      0.000000      0.000000   
+         50\%     8292.000000   2007.000000      0.080000      0.020000      0.000000   
+         75\%    12439.500000   2010.000000      0.240000      0.110000      0.040000   
+         max    16600.000000   2020.000000     41.490000     29.020000     10.220000   
+         
+                 Other\_Sales  Global\_Sales  
+         count  16291.000000  16291.000000  
+         mean       0.048426      0.540910  
+         std        0.190083      1.567345  
+         min        0.000000      0.010000  
+         25\%        0.000000      0.060000  
+         50\%        0.010000      0.170000  
+         75\%        0.040000      0.480000  
+         max       10.570000     82.740000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} General Obervations}
+         \PY{c+c1}{\PYZsh{} sales for the regions }
+         
+         \PY{n}{average\PYZus{}sales\PYZus{}NA} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{average\PYZus{}sales\PYZus{}EU} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{average\PYZus{}sales\PYZus{}JP} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{average\PYZus{}sales\PYZus{}Oth} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{average\PYZus{}sales\PYZus{}Global} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         
+          
+         \PY{n}{total\PYZus{}sales\PYZus{}NA} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{total\PYZus{}sales\PYZus{}EU} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{total\PYZus{}sales\PYZus{}JP} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{total\PYZus{}sales\PYZus{}Oth} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{total\PYZus{}sales\PYZus{}Global} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{number\PYZus{}sales}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{n}{item\PYZus{}count} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} DataFrame to hold results}
+         \PY{n}{summary\PYZus{}table} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Unique Items}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{item\PYZus{}count}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Sales NA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{total\PYZus{}sales\PYZus{}NA}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Sales EU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{total\PYZus{}sales\PYZus{}EU}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Sales JP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{total\PYZus{}sales\PYZus{}JP}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Sales Oth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{total\PYZus{}sales\PYZus{}Oth}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Sales Global}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{total\PYZus{}sales\PYZus{}Global}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Sales NA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{average\PYZus{}sales\PYZus{}NA}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Sales EU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{average\PYZus{}sales\PYZus{}EU}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Sales JP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{average\PYZus{}sales\PYZus{}JP}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Sales Oth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{average\PYZus{}sales\PYZus{}Oth}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Sales Global}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{average\PYZus{}sales\PYZus{}Global}\PY{p}{]}\PY{p}{,}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Sales Number}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{number\PYZus{}sales}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+          
+         \PY{n}{summary\PYZus{}table} \PY{o}{=} \PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Display the summary\PYZus{}table}
+         \PY{n}{summary\PYZus{}table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}    Number of Unique Items  Total Sales NA  Total Sales EU  Total Sales JP  \textbackslash{}
+         0                   11325         4327.65         2406.69         1284.27   
+         
+            Total Sales Oth  Total Sales Global  Average Sales NA  Average Sales EU  \textbackslash{}
+         0           788.91             8811.97              0.27              0.15   
+         
+            Average Sales JP  Average Sales Oth  Average Sales Global  \textbackslash{}
+         0              0.08               0.05                  0.54   
+         
+            Total Sales Number  
+         0               16291  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}sales share by region }
+         \PY{n}{NA\PYZus{}per} \PY{o}{=} \PY{n}{total\PYZus{}sales\PYZus{}NA}\PY{o}{/}\PY{n}{total\PYZus{}sales\PYZus{}Global}\PY{o}{*}\PY{l+m+mi}{100}
+         \PY{n}{EU\PYZus{}per} \PY{o}{=} \PY{n}{total\PYZus{}sales\PYZus{}EU}\PY{o}{/}\PY{n}{total\PYZus{}sales\PYZus{}Global}\PY{o}{*}\PY{l+m+mi}{100}  
+         \PY{n}{JP\PYZus{}per} \PY{o}{=} \PY{n}{total\PYZus{}sales\PYZus{}JP}\PY{o}{/}\PY{n}{total\PYZus{}sales\PYZus{}Global}\PY{o}{*}\PY{l+m+mi}{100}  
+         \PY{n}{oth\PYZus{}per} \PY{o}{=} \PY{n}{total\PYZus{}sales\PYZus{}Oth} \PY{o}{/}\PY{n}{total\PYZus{}sales\PYZus{}Global}\PY{o}{*}\PY{l+m+mi}{100}
+         
+         \PY{n}{Sales\PYZus{}dist\PYZus{}table} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Percentage Sales NA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{NA\PYZus{}per}\PY{p}{]}\PY{p}{,}
+                                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Percentage Sales EU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{EU\PYZus{}per}\PY{p}{]}\PY{p}{,}
+                                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Percentage Sales JP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{JP\PYZus{}per}\PY{p}{]}\PY{p}{,}
+                                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Percentage Sales Oth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n}{oth\PYZus{}per}\PY{p}{]}
+                                       \PY{p}{\PYZcb{}}\PY{p}{)}
+         
+          
+         \PY{n}{Sales\PYZus{}dist\PYZus{}table} \PY{o}{=} \PY{n}{Sales\PYZus{}dist\PYZus{}table}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Display the summary\PYZus{}table}
+         \PY{n}{Sales\PYZus{}dist\PYZus{}table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}    Percentage Sales NA  Percentage Sales EU  Percentage Sales JP  \textbackslash{}
+         0                49.11                27.31                14.57   
+         
+            Percentage Sales Oth  
+         0                  8.95  
+\end{Verbatim}
+            
+    \section{Observations}\label{observations}
+
+North America has the highest regional share of the total video games
+sales, followed by European Union , Japan and then rest of the world
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}count by genres}
+        \PY{n}{count\PYZus{}genres} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Genre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+        \PY{n}{count\PYZus{}genres} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} Action          3251
+        Sports          2304
+        Misc            1686
+        Role-Playing    1470
+        Shooter         1282
+        Adventure       1274
+        Racing          1225
+        Platform         875
+        Simulation       848
+        Fighting         836
+        Strategy         670
+        Puzzle           570
+        Name: Genre, dtype: int64
+\end{Verbatim}
+            
+    \section{Observation}\label{observation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Action tops the sales by genre, followed by Sports, Misc and role
+  playing.
+\item
+  Puzzle and strategy are at the lower sales levels
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}count of uniques publishers}
+         \PY{n}{count\PYZus{}publisher} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Publisher}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{count\PYZus{}publisher}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} Electronic Arts                           1339
+         Activision                                 966
+         Namco Bandai Games                         928
+         Ubisoft                                    918
+         Konami Digital Entertainment               823
+         THQ                                        712
+         Nintendo                                   696
+         Sony Computer Entertainment                682
+         Sega                                       632
+         Take-Two Interactive                       412
+         Capcom                                     376
+         Atari                                      347
+         Tecmo Koei                                 338
+         Square Enix                                231
+         Warner Bros. Interactive Entertainment     217
+         Disney Interactive Studios                 214
+         Midway Games                               196
+         Eidos Interactive                          196
+         505 Games                                  192
+         Microsoft Game Studios                     189
+         Acclaim Entertainment                      184
+         D3Publisher                                183
+         Vivendi Games                              161
+         Codemasters                                150
+         Idea Factory                               128
+         Deep Silver                                121
+         Nippon Ichi Software                       104
+         Zoo Digital Publishing                     104
+         Unknown                                    100
+         Majesco Entertainment                       90
+                                                   {\ldots} 
+         TalonSoft                                    1
+         Havas Interactive                            1
+         Monte Christo Multimedia                     1
+         Sold Out                                     1
+         Sunflowers                                   1
+         Introversion Software                        1
+         Epic Games                                   1
+         Ecole                                        1
+         Mitsui                                       1
+         On Demand                                    1
+         Interchannel-Holon                           1
+         Mirai Shounen                                1
+         DreamWorks Interactive                       1
+         Pow                                          1
+         CPG Products                                 1
+         Game Arts                                    1
+         Rain Games                                   1
+         Visco                                        1
+         Gameloft                                     1
+         PM Studios                                   1
+         Aques                                        1
+         Westwood Studios                             1
+         Bohemia Interactive                          1
+         Glams                                        1
+         Navarre Corp                                 1
+         Tryfirst                                     1
+         Mystique                                     1
+         Genterprise                                  1
+         Magical Company                              1
+         Fuji                                         1
+         Name: Publisher, Length: 576, dtype: int64
+\end{Verbatim}
+            
+    \section{Observations}\label{observations}
+
+There are 576 publishers. The top 5 are 1. Electronic Arts\\
+2. Activision\\
+3. Namco Bandai Games\\
+4. Ubisoft\\
+5. Konami Digital Entertainment
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}count of uniques platforms}
+        \PY{n}{count\PYZus{}platforms} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Platform}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+        \PY{n}{count\PYZus{}platforms} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} DS      2131
+        PS2     2127
+        PS3     1304
+        Wii     1290
+        X360    1234
+        PSP     1197
+        PS      1189
+        PC       938
+        XB       803
+        GBA      786
+        GC       542
+        3DS      499
+        PSV      410
+        PS4      336
+        N64      316
+        SNES     239
+        XOne     213
+        SAT      173
+        WiiU     143
+        2600     116
+        NES       98
+        GB        97
+        DC        52
+        GEN       27
+        NG        12
+        SCD        6
+        WS         6
+        3DO        3
+        TG16       2
+        GG         1
+        PCFX       1
+        Name: Platform, dtype: int64
+\end{Verbatim}
+            
+    \section{Obervations}\label{obervations}
+
+There are 31 publishers Top 7 publishers 1. DS\\
+2. PS2\\
+3. PS3\\
+4. Wii\\
+5. X360\\
+6. PSP\\
+7. PS
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Sales Trends by regions}
+         \PY{n}{by\PYZus{}year} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}year} \PY{o}{=} \PY{n}{by\PYZus{}year}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sales\PYZus{}by\PYZus{}year} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sales\PYZus{}by\PYZus{}year}\PY{p}{)}
+         \PY{n}{sales\PYZus{}by\PYZus{}year} \PY{o}{=} \PY{n}{sales\PYZus{}by\PYZus{}year}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)} 
+          
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}year}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}         Global\_Sales  NA\_Sales  EU\_Sales  JP\_Sales  Other\_Sales
+         Year                                                           
+         2008.0        678.90    351.44    184.40     60.26        82.39
+         2009.0        667.30    338.85    191.59     61.89        74.77
+         2007.0        609.92    311.18    160.18     60.29        77.58
+         2010.0        600.29    304.24    176.57     59.49        59.90
+         2006.0        521.04    263.12    129.24     73.73        54.43
+         2011.0        515.80    241.00    167.31     53.04        54.39
+         2005.0        458.51    241.58    121.56     54.28        40.55
+         2004.0        414.01    218.80    105.92     41.65        47.24
+         2002.0        395.52    216.19    109.74     41.76        27.28
+         2013.0        368.11    154.77    125.80     47.59        39.82
+         2012.0        363.49    154.93    118.76     51.74        37.82
+         2003.0        357.85    193.59    103.81     34.20        26.01
+         2014.0        337.03    131.97    125.63     39.46        40.02
+         2001.0        331.47    173.98     94.89     39.86        22.76
+         2015.0        264.44    102.82     97.71     33.72        30.01
+         1998.0        256.47    128.36     66.90     50.04        11.03
+         1999.0        251.27    126.06     62.67     52.34        10.05
+         2000.0        201.56     94.49     52.75     42.77        11.62
+         1997.0        200.98     94.75     48.32     48.87         9.13
+         1996.0        199.15     86.76     47.26     57.44         7.69
+         1995.0         88.11     24.82     14.90     45.75         2.64
+         1994.0         79.17     28.15     14.88     33.99         2.20
+         1992.0         76.16     33.87     11.71     28.91         1.65
+         1989.0         73.45     45.15      8.44     18.36         1.50
+         2016.0         70.90     22.66     26.76     13.67         7.75
+         1985.0         53.94     33.73      4.74     14.56         0.92
+         1984.0         50.36     33.28      2.10     14.27         0.70
+         1990.0         49.39     25.46      7.63     14.88         1.40
+         1988.0         47.22     23.87      6.59     15.76         0.99
+         1993.0         45.98     15.12      4.65     25.33         0.89
+         1986.0         37.07     12.50      2.84     19.81         1.93
+         1981.0         35.77     33.40      1.96      0.00         0.32
+         1991.0         32.23     12.76      3.95     14.78         0.74
+         1982.0         28.86     26.92      1.65      0.00         0.31
+         1987.0         21.74      8.46      1.41     11.63         0.20
+         1983.0         16.79      7.76      0.80      8.10         0.14
+         1980.0         11.38     10.59      0.67      0.00         0.12
+         2020.0          0.29      0.27      0.00      0.00         0.02
+         2017.0          0.05      0.00      0.00      0.05         0.00
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Sales by publisher for regions}
+         \PY{n}{by\PYZus{}pub} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Publisher}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}pub} \PY{o}{=} \PY{n}{by\PYZus{}pub}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}pub} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sales\PYZus{}by\PYZus{}pub}\PY{p}{)}
+         \PY{n}{sales\PYZus{}by\PYZus{}pub} \PY{o}{=} \PY{n}{sales\PYZus{}by\PYZus{}pub}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}pub}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}                                         Global\_Sales  NA\_Sales  EU\_Sales  \textbackslash{}
+         Publisher                                                                  
+         Nintendo                                     1784.43    815.75    418.30   
+         Electronic Arts                              1093.39    584.22    367.38   
+         Activision                                    721.41    426.01    213.72   
+         Sony Computer Entertainment                   607.28    265.22    187.55   
+         Ubisoft                                       473.54    252.81    163.03   
+         Take-Two Interactive                          399.30    220.47    117.95   
+         THQ                                           340.44    208.60     94.60   
+         Konami Digital Entertainment                  278.56     88.91     68.62   
+         Sega                                          270.70    108.78     81.41   
+         Namco Bandai Games                            253.65     69.38     42.61   
+         Microsoft Game Studios                        245.79    155.35     68.61   
+         Capcom                                        199.95     78.45     39.16   
+         Atari                                         146.77    101.23     25.80   
+         Square Enix                                   144.73     48.59     32.57   
+         Warner Bros. Interactive Entertainment        142.34     75.34     48.83   
+         Disney Interactive Studios                    118.76     70.44     34.36   
+         Eidos Interactive                              96.75     47.85     34.85   
+         LucasArts                                      84.95     48.43     26.00   
+         Bethesda Softworks                             81.53     39.43     30.48   
+         Midway Games                                   69.29     45.10     18.22   
+         Acclaim Entertainment                          64.14     42.75     16.75   
+         SquareSoft                                     57.65     11.06      4.95   
+         Vivendi Games                                  56.93     36.24     15.65   
+         505 Games                                      55.91     31.83     16.43   
+         Tecmo Koei                                     53.55     14.08      7.08   
+         Codemasters                                    47.77     11.88     28.65   
+         Virgin Interactive                             43.87     18.99     12.94   
+         Enix Corporation                               33.74      0.76      0.31   
+         Deep Silver                                    25.59     12.73      8.89   
+         GT Interactive                                 25.23     15.57      8.49   
+         {\ldots}                                              {\ldots}       {\ldots}       {\ldots}   
+         Giga                                            0.02      0.00      0.00   
+         Revolution (Japan)                              0.02      0.00      0.00   
+         Plenty                                          0.02      0.00      0.00   
+         GOA                                             0.02      0.00      0.02   
+         Marvelous Games                                 0.02      0.00      0.00   
+         Technos Japan Corporation                       0.02      0.00      0.00   
+         RED Entertainment                               0.02      0.00      0.00   
+         Quintet                                         0.02      0.00      0.00   
+         Masque Publishing                               0.02      0.01      0.00   
+         Media Entertainment                             0.01      0.00      0.00   
+         Interworks Unlimited, Inc.                      0.01      0.01      0.00   
+         Ongakukan                                       0.01      0.00      0.00   
+         Interchannel-Holon                              0.01      0.00      0.00   
+         Inti Creates                                    0.01      0.00      0.00   
+         Otomate                                         0.01      0.00      0.00   
+         Michaelsoft                                     0.01      0.00      0.00   
+         UIG Entertainment                               0.01      0.00      0.01   
+         Stainless Games                                 0.01      0.01      0.01   
+         EON Digital Entertainment                       0.01      0.01      0.00   
+         Boost On                                        0.01      0.00      0.00   
+         New World Computing                             0.01      0.01      0.00   
+         Takuyo                                          0.01      0.00      0.00   
+         Naxat Soft                                      0.01      0.00      0.00   
+         Piacci                                          0.01      0.00      0.00   
+         Genterprise                                     0.01      0.00      0.00   
+         Epic Games                                      0.01      0.01      0.00   
+         Paradox Development                             0.01      0.00      0.01   
+         Rain Games                                      0.01      0.00      0.01   
+         Ascaron Entertainment                           0.01      0.00      0.01   
+         Commseed                                        0.01      0.00      0.00   
+         
+                                                 JP\_Sales  Other\_Sales  
+         Publisher                                                      
+         Nintendo                                  454.99        95.19  
+         Electronic Arts                            13.98       127.63  
+         Activision                                  6.54        74.79  
+         Sony Computer Entertainment                74.10        80.40  
+         Ubisoft                                     7.33        50.16  
+         Take-Two Interactive                        5.83        55.20  
+         THQ                                         5.01        32.11  
+         Konami Digital Entertainment               90.93        29.91  
+         Sega                                       56.19        24.30  
+         Namco Bandai Games                        126.84        14.64  
+         Microsoft Game Studios                      3.26        18.56  
+         Capcom                                     67.38        14.82  
+         Atari                                      10.70         8.73  
+         Square Enix                                49.79        13.84  
+         Warner Bros. Interactive Entertainment      1.03        17.14  
+         Disney Interactive Studios                  0.56        13.15  
+         Eidos Interactive                           6.11         7.90  
+         LucasArts                                   0.20        10.28  
+         Bethesda Softworks                          1.44        10.10  
+         Midway Games                                0.12         5.69  
+         Acclaim Entertainment                       1.14         3.37  
+         SquareSoft                                 40.13         1.54  
+         Vivendi Games                               0.23         4.76  
+         505 Games                                   2.05         5.44  
+         Tecmo Koei                                 29.21         3.18  
+         Codemasters                                 0.83         6.29  
+         Virgin Interactive                          8.94         3.03  
+         Enix Corporation                           32.40         0.27  
+         Deep Silver                                 1.09         2.87  
+         GT Interactive                              0.02         1.14  
+         {\ldots}                                          {\ldots}          {\ldots}  
+         Giga                                        0.02         0.00  
+         Revolution (Japan)                          0.02         0.00  
+         Plenty                                      0.02         0.00  
+         GOA                                         0.00         0.00  
+         Marvelous Games                             0.02         0.00  
+         Technos Japan Corporation                   0.02         0.00  
+         RED Entertainment                           0.02         0.00  
+         Quintet                                     0.02         0.00  
+         Masque Publishing                           0.00         0.00  
+         Media Entertainment                         0.01         0.00  
+         Interworks Unlimited, Inc.                  0.00         0.00  
+         Ongakukan                                   0.01         0.00  
+         Interchannel-Holon                          0.01         0.00  
+         Inti Creates                                0.01         0.00  
+         Otomate                                     0.01         0.00  
+         Michaelsoft                                 0.01         0.00  
+         UIG Entertainment                           0.00         0.00  
+         Stainless Games                             0.00         0.00  
+         EON Digital Entertainment                   0.00         0.00  
+         Boost On                                    0.01         0.00  
+         New World Computing                         0.00         0.00  
+         Takuyo                                      0.01         0.00  
+         Naxat Soft                                  0.01         0.00  
+         Piacci                                      0.01         0.00  
+         Genterprise                                 0.01         0.00  
+         Epic Games                                  0.00         0.00  
+         Paradox Development                         0.00         0.00  
+         Rain Games                                  0.00         0.00  
+         Ascaron Entertainment                       0.00         0.00  
+         Commseed                                    0.01         0.00  
+         
+         [576 rows x 5 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Sales by Genre for regions}
+         \PY{n}{by\PYZus{}genre} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Genre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}genre} \PY{o}{=} \PY{n}{by\PYZus{}genre}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}} \PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}genre} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sales\PYZus{}by\PYZus{}genre}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}genre} \PY{o}{=} \PY{n}{sales\PYZus{}by\PYZus{}genre}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}genre}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}               Global\_Sales  NA\_Sales  EU\_Sales  JP\_Sales  Other\_Sales
+         Genre                                                                
+         Action             1722.84    861.77    516.48    158.65       184.92
+         Adventure           234.59    101.93     63.74     51.99        16.70
+         Fighting            444.05    220.74    100.00     87.15        36.19
+         Misc                789.87    396.92    211.77    106.67        73.92
+         Platform            829.13    445.99    200.65    130.65        51.51
+         Puzzle              242.21    122.01     50.52     56.68        12.47
+         Racing              726.76    356.93    236.31     56.61        76.68
+         Role-Playing        923.83    326.50    187.57    350.29        59.38
+         Shooter            1026.20    575.16    310.45     38.18       101.90
+         Simulation          389.98    181.78    113.02     63.54        31.36
+         Sports             1309.24    670.09    371.34    134.76       132.65
+         Strategy            173.27     67.83     44.84     49.10        11.23
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Sales by Platform for regions}
+         \PY{n}{by\PYZus{}platform} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Platform}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}platform} \PY{o}{=} \PY{n}{by\PYZus{}platform}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}} \PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}platform} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sales\PYZus{}by\PYZus{}platform}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}platform} \PY{o}{=} \PY{n}{sales\PYZus{}by\PYZus{}platform}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}platform}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}           Global\_Sales  NA\_Sales  EU\_Sales  JP\_Sales  Other\_Sales
+         Platform                                                         
+         PS2            1233.46    572.92    332.63    137.54       190.47
+         X360            969.60    594.33    278.00     12.30        84.67
+         PS3             949.35    388.90    340.47     79.21       140.81
+         Wii             909.81    497.37    264.35     68.28        79.20
+         DS              818.91    388.53    194.05    175.02        60.29
+         PS              727.39    334.71    212.38    139.78        40.69
+         GBA             305.62    178.43     72.49     46.56         7.51
+         PSP             291.71    107.09     67.16     75.89        41.52
+         PS4             278.10     96.80    123.70     14.30        43.36
+         PC              254.70     92.04    137.35      0.17        24.33
+         GB              254.42    113.64     47.51     85.12         8.16
+         XB              252.09    182.06     59.65      1.38         8.48
+         NES             251.07    125.94     21.15     98.65         5.31
+         3DS             246.27     78.03     58.29     97.30        12.55
+         N64             218.21    138.91     41.03     33.76         4.31
+         SNES            200.05     61.23     19.04    116.55         3.22
+         GC              197.14    131.94     38.32     21.34         5.13
+         XOne            141.06     83.19     45.65      0.34        11.92
+         2600             86.57     80.78      4.86      0.00         0.84
+         WiiU             81.86     38.32     24.23     12.79         6.45
+         PSV              61.60     16.07     16.27     20.86         8.41
+         SAT              33.59      0.72      0.54     32.26         0.07
+         GEN              28.36     19.27      5.52      2.67         0.89
+         DC               15.97      5.43      1.69      8.56         0.27
+         SCD               1.87      1.00      0.36      0.45         0.05
+         NG                1.44      0.00      0.00      1.44         0.00
+         WS                1.42      0.00      0.00      1.42         0.00
+         TG16              0.16      0.00      0.00      0.16         0.00
+         3DO               0.10      0.00      0.00      0.10         0.00
+         GG                0.04      0.00      0.00      0.04         0.00
+         PCFX              0.03      0.00      0.00      0.03         0.00
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Sales by Name for regions}
+         \PY{n}{by\PYZus{}name} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}name} \PY{o}{=} \PY{n}{by\PYZus{}name}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Global\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EU\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{JP\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other\PYZus{}Sales}\PY{l+s+s2}{\PYZdq{}} \PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}name} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sales\PYZus{}by\PYZus{}name}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}name}\PY{o}{=} \PY{n}{sales\PYZus{}by\PYZus{}name}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{sales\PYZus{}by\PYZus{}name}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}                                                     Global\_Sales  NA\_Sales  \textbackslash{}
+         Name                                                                         
+         Wii Sports                                                 82.74     41.49   
+         Grand Theft Auto V                                         55.92     23.46   
+         Super Mario Bros.                                          45.31     32.48   
+         Tetris                                                     35.84     26.17   
+         Mario Kart Wii                                             35.82     15.85   
+         Wii Sports Resort                                          33.00     15.75   
+         Pokemon Red/Pokemon Blue                                   31.37     11.27   
+         Call of Duty: Modern Warfare 3                             30.83     15.58   
+         New Super Mario Bros.                                      30.01     11.38   
+         Call of Duty: Black Ops II                                 29.72     14.08   
+         Call of Duty: Black Ops                                    29.40     17.01   
+         Wii Play                                                   29.02     14.03   
+         New Super Mario Bros. Wii                                  28.62     14.59   
+         Duck Hunt                                                  28.31     26.93   
+         Call of Duty: Ghosts                                       27.38     14.92   
+         Super Mario World                                          26.07     15.99   
+         Call of Duty: Black Ops 3                                  25.32     11.89   
+         Call of Duty: Modern Warfare 2                             25.09     13.52   
+         Nintendogs                                                 24.76      9.07   
+         Grand Theft Auto: San Andreas                              23.86     10.77   
+         Minecraft                                                  23.73     10.82   
+         Mario Kart DS                                              23.42      9.81   
+         Pokemon Gold/Pokemon Silver                                23.10      9.00   
+         Wii Fit                                                    22.72      8.94   
+         Super Mario Bros. 3                                        22.48     12.47   
+         Grand Theft Auto IV                                        22.47     11.53   
+         Super Mario 64                                             22.31     11.99   
+         Wii Fit Plus                                               22.00      9.09   
+         Call of Duty: Advanced Warfare                             21.90     10.44   
+         Kinect Adventures!                                         21.82     14.97   
+         {\ldots}                                                          {\ldots}       {\ldots}   
+         Rock N' Roll Racing                                         0.01      0.00   
+         Element Girl: Love, Fashion and Friends                     0.01      0.00   
+         Outdoors Unleashed: Alaska 3D                               0.01      0.01   
+         Kurogane Kaikitan                                           0.01      0.00   
+         Farming Simulator 15 Expansion Pack                         0.01      0.00   
+         Cross Edge Dash                                             0.01      0.00   
+         Ouka Sengoku Portable                                       0.01      0.00   
+         Element Hunter                                              0.01      0.00   
+         Tsuyo Kiss 3 Portable                                       0.01      0.00   
+         Gakuen Hetalia                                              0.01      0.00   
+         Kanokon: Esuii                                              0.01      0.00   
+         Farming 2017 - The Simulation                               0.01      0.00   
+         Hirameki Action: Chibikko Wagyan no Daiki na Bo{\ldots}          0.01      0.00   
+         Dramatical Murder Re:code                                   0.01      0.00   
+         PC Engine Best Collention: Ginga Ojousama Dense{\ldots}          0.01      0.00   
+         PGA European Tour                                           0.01      0.01   
+         Road Trip: Shifting Gears                                   0.01      0.01   
+         Wedding Planner: Dream Weddings Guaranteed                  0.01      0.00   
+         Aladdin Magic Racer                                         0.01      0.01   
+         Tears to Tiara: Kakan no Daichi Portable                    0.01      0.00   
+         Himawari: Pebble in the Sky Portable                        0.01      0.00   
+         Marginal \#4: Idol of Supernova                              0.01      0.00   
+         Akatsuki no Amaneka to Aoi Kyojin                           0.01      0.00   
+         Tantei Jinguuji Saburo: Hai to Diamond                      0.01      0.00   
+         Tantei Jinguuji Saburo DS: Fuserareta Shinjitsu             0.01      0.00   
+         Eiyuu Densetsu: Sora no Kiseki Material Collect{\ldots}          0.01      0.00   
+         Kao the Kangaroo                                            0.01      0.01   
+         Fashionable Puppy: Oshare na Koinu DS                       0.01      0.00   
+         Mario \& Luigi: Paper Jam \& Mario Kart 7 Double {\ldots}          0.01      0.00   
+         Simple DS Series Vol. 14: The Jidousha Kyoushuu{\ldots}          0.01      0.00   
+         
+                                                             EU\_Sales  JP\_Sales  \textbackslash{}
+         Name                                                                     
+         Wii Sports                                             29.02      3.77   
+         Grand Theft Auto V                                     23.04      1.39   
+         Super Mario Bros.                                       4.88      6.96   
+         Tetris                                                  2.95      6.03   
+         Mario Kart Wii                                         12.88      3.79   
+         Wii Sports Resort                                      11.01      3.28   
+         Pokemon Red/Pokemon Blue                                8.89     10.22   
+         Call of Duty: Modern Warfare 3                         11.29      0.62   
+         New Super Mario Bros.                                   9.23      6.50   
+         Call of Duty: Black Ops II                             11.05      0.72   
+         Call of Duty: Black Ops                                 8.69      0.59   
+         Wii Play                                                9.20      2.93   
+         New Super Mario Bros. Wii                               7.06      4.70   
+         Duck Hunt                                               0.63      0.28   
+         Call of Duty: Ghosts                                    9.05      0.48   
+         Super Mario World                                       4.86      4.49   
+         Call of Duty: Black Ops 3                               9.56      0.43   
+         Call of Duty: Modern Warfare 2                          8.11      0.46   
+         Nintendogs                                             11.00      1.93   
+         Grand Theft Auto: San Andreas                           1.96      0.41   
+         Minecraft                                               8.85      1.15   
+         Mario Kart DS                                           7.57      4.13   
+         Pokemon Gold/Pokemon Silver                             6.18      7.20   
+         Wii Fit                                                 8.03      3.60   
+         Super Mario Bros. 3                                     4.69      4.67   
+         Grand Theft Auto IV                                     7.65      0.58   
+         Super Mario 64                                          5.96      3.16   
+         Wii Fit Plus                                            8.59      2.53   
+         Call of Duty: Advanced Warfare                          8.18      0.34   
+         Kinect Adventures!                                      4.94      0.24   
+         {\ldots}                                                      {\ldots}       {\ldots}   
+         Rock N' Roll Racing                                     0.00      0.01   
+         Element Girl: Love, Fashion and Friends                 0.01      0.00   
+         Outdoors Unleashed: Alaska 3D                           0.00      0.00   
+         Kurogane Kaikitan                                       0.00      0.01   
+         Farming Simulator 15 Expansion Pack                     0.01      0.00   
+         Cross Edge Dash                                         0.00      0.01   
+         Ouka Sengoku Portable                                   0.00      0.01   
+         Element Hunter                                          0.00      0.01   
+         Tsuyo Kiss 3 Portable                                   0.00      0.01   
+         Gakuen Hetalia                                          0.00      0.01   
+         Kanokon: Esuii                                          0.00      0.01   
+         Farming 2017 - The Simulation                           0.01      0.00   
+         Hirameki Action: Chibikko Wagyan no Daiki na Bo{\ldots}      0.00      0.01   
+         Dramatical Murder Re:code                               0.00      0.01   
+         PC Engine Best Collention: Ginga Ojousama Dense{\ldots}      0.00      0.01   
+         PGA European Tour                                       0.00      0.00   
+         Road Trip: Shifting Gears                               0.00      0.00   
+         Wedding Planner: Dream Weddings Guaranteed              0.01      0.00   
+         Aladdin Magic Racer                                     0.00      0.00   
+         Tears to Tiara: Kakan no Daichi Portable                0.00      0.01   
+         Himawari: Pebble in the Sky Portable                    0.00      0.01   
+         Marginal \#4: Idol of Supernova                          0.00      0.01   
+         Akatsuki no Amaneka to Aoi Kyojin                       0.00      0.01   
+         Tantei Jinguuji Saburo: Hai to Diamond                  0.00      0.01   
+         Tantei Jinguuji Saburo DS: Fuserareta Shinjitsu         0.00      0.01   
+         Eiyuu Densetsu: Sora no Kiseki Material Collect{\ldots}      0.00      0.01   
+         Kao the Kangaroo                                        0.00      0.00   
+         Fashionable Puppy: Oshare na Koinu DS                   0.00      0.01   
+         Mario \& Luigi: Paper Jam \& Mario Kart 7 Double {\ldots}      0.00      0.01   
+         Simple DS Series Vol. 14: The Jidousha Kyoushuu{\ldots}      0.00      0.01   
+         
+                                                             Other\_Sales  
+         Name                                                             
+         Wii Sports                                                 8.46  
+         Grand Theft Auto V                                         8.03  
+         Super Mario Bros.                                          0.99  
+         Tetris                                                     0.69  
+         Mario Kart Wii                                             3.31  
+         Wii Sports Resort                                          2.96  
+         Pokemon Red/Pokemon Blue                                   1.00  
+         Call of Duty: Modern Warfare 3                             3.35  
+         New Super Mario Bros.                                      2.90  
+         Call of Duty: Black Ops II                                 3.88  
+         Call of Duty: Black Ops                                    3.12  
+         Wii Play                                                   2.85  
+         New Super Mario Bros. Wii                                  2.26  
+         Duck Hunt                                                  0.47  
+         Call of Duty: Ghosts                                       2.92  
+         Super Mario World                                          0.75  
+         Call of Duty: Black Ops 3                                  3.42  
+         Call of Duty: Modern Warfare 2                             3.01  
+         Nintendogs                                                 2.75  
+         Grand Theft Auto: San Andreas                             10.72  
+         Minecraft                                                  2.93  
+         Mario Kart DS                                              1.92  
+         Pokemon Gold/Pokemon Silver                                0.71  
+         Wii Fit                                                    2.15  
+         Super Mario Bros. 3                                        0.66  
+         Grand Theft Auto IV                                        2.73  
+         Super Mario 64                                             1.21  
+         Wii Fit Plus                                               1.79  
+         Call of Duty: Advanced Warfare                             2.93  
+         Kinect Adventures!                                         1.67  
+         {\ldots}                                                         {\ldots}  
+         Rock N' Roll Racing                                        0.00  
+         Element Girl: Love, Fashion and Friends                    0.00  
+         Outdoors Unleashed: Alaska 3D                              0.00  
+         Kurogane Kaikitan                                          0.00  
+         Farming Simulator 15 Expansion Pack                        0.00  
+         Cross Edge Dash                                            0.00  
+         Ouka Sengoku Portable                                      0.00  
+         Element Hunter                                             0.00  
+         Tsuyo Kiss 3 Portable                                      0.00  
+         Gakuen Hetalia                                             0.00  
+         Kanokon: Esuii                                             0.00  
+         Farming 2017 - The Simulation                              0.00  
+         Hirameki Action: Chibikko Wagyan no Daiki na Bo{\ldots}         0.00  
+         Dramatical Murder Re:code                                  0.00  
+         PC Engine Best Collention: Ginga Ojousama Dense{\ldots}         0.00  
+         PGA European Tour                                          0.00  
+         Road Trip: Shifting Gears                                  0.00  
+         Wedding Planner: Dream Weddings Guaranteed                 0.00  
+         Aladdin Magic Racer                                        0.00  
+         Tears to Tiara: Kakan no Daichi Portable                   0.00  
+         Himawari: Pebble in the Sky Portable                       0.00  
+         Marginal \#4: Idol of Supernova                             0.00  
+         Akatsuki no Amaneka to Aoi Kyojin                          0.00  
+         Tantei Jinguuji Saburo: Hai to Diamond                     0.00  
+         Tantei Jinguuji Saburo DS: Fuserareta Shinjitsu            0.00  
+         Eiyuu Densetsu: Sora no Kiseki Material Collect{\ldots}         0.00  
+         Kao the Kangaroo                                           0.00  
+         Fashionable Puppy: Oshare na Koinu DS                      0.00  
+         Mario \& Luigi: Paper Jam \& Mario Kart 7 Double {\ldots}         0.00  
+         Simple DS Series Vol. 14: The Jidousha Kyoushuu{\ldots}         0.00  
+         
+         [11325 rows x 5 columns]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
